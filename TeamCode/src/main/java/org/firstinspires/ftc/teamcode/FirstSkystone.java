@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Run this auto for blue side", group = "Competition.3")
-public class compeititon3BluSide extends LinearOpMode {
+@Autonomous (name="Run this auto for red side, Skystone 1.", group="Competition.4")
+public class FirstSkystone extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftfront = null;
@@ -16,7 +16,7 @@ public class compeititon3BluSide extends LinearOpMode {
     private DcMotor rightrear = null;
     private Servo foundationServo = null;
 
-    public void power(double speed, int length) {
+    public void power(double speed, int length){
         leftfront.setPower(speed);
         rightfront.setPower(speed);
         leftrear.setPower(speed);
@@ -24,7 +24,7 @@ public class compeititon3BluSide extends LinearOpMode {
         sleep(length);
     }
 
-    public void turn(double speed, int length) {
+    public void turn(double speed, int length){
         leftfront.setPower(speed);
         rightfront.setPower(-speed);
         leftrear.setPower(speed);
@@ -32,17 +32,17 @@ public class compeititon3BluSide extends LinearOpMode {
         sleep(length);
     }
 
-    public void strafe(double speed, int time) {
+    public void strafe (double speed, int time)   {
         leftfront.setPower(speed);
-        rightrear.setPower(speed * .5);
-        leftrear.setPower(-speed * .5);
+        rightrear.setPower(speed*.5);
+        leftrear.setPower(-speed*.5);
         rightfront.setPower(-speed);
         sleep(time);
     }
 
-    public void Path() {
+    public void Path(){
         runtime.reset();
-        strafe(1,200);
+        strafe(-1,800);
         power(1, 1400);
         power(0, 500);
         foundationServo.setPosition(.5);
@@ -51,16 +51,21 @@ public class compeititon3BluSide extends LinearOpMode {
         foundationServo.setPosition(0);
         power(0, 500);
         sleep(1000);
-        strafe(-1, 2000);
+        strafe(1, 2000);
         power(1, 700);
-        strafe(1, 1000);
-        strafe(-1, 1700);
-        power(1,500);
+        strafe(-1, 1000);
+        strafe(1, 1700);
+        power(-1,5000);
+        strafe(1,1000);
+        power(0,0);
+
+        power(1,1400);
+
     }
 
     @Override
     public void runOpMode() {
-        leftfront = hardwareMap.get(DcMotor.class, "left_front");
+        leftfront  = hardwareMap.get(DcMotor.class, "left_front");
         rightfront = hardwareMap.get(DcMotor.class, "right_front");
         leftrear = hardwareMap.get(DcMotor.class, "left_rear");
         rightrear = hardwareMap.get(DcMotor.class, "right_rear");
@@ -70,6 +75,11 @@ public class compeititon3BluSide extends LinearOpMode {
         rightfront.setDirection(DcMotor.Direction.FORWARD);
         leftrear.setDirection(DcMotor.Direction.REVERSE);
         rightrear.setDirection(DcMotor.Direction.FORWARD);
+
+        leftfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftrear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightrear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         Path();
     }

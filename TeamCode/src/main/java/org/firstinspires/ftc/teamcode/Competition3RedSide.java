@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name="Run this auto for red side", group="Foundation")
+@Autonomous (name="Run this auto for red side", group="Competition.3")
 public class Competition3RedSide extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -42,17 +42,19 @@ public class Competition3RedSide extends LinearOpMode {
 
     public void Path(){
         runtime.reset();
-        power(1, 1000);
+        strafe(-1,800);
+        power(1, 1400);
         power(0, 500);
         foundationServo.setPosition(.5);
         sleep(500);
-        power(-0.5, 4000);
-        power(0, 500);
+        power(-0.5, 5000);
         foundationServo.setPosition(0);
+        power(0, 500);
         sleep(1000);
-        strafe(-1, 2500);
-        power(1, 800);
-        strafe(-1, 1500);
+        strafe(1, 2000);
+        power(1, 700);
+        strafe(-1, 1000);
+        strafe(1, 1700);
     }
 
     @Override

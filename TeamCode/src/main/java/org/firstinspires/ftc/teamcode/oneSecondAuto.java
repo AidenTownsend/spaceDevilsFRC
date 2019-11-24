@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "movrs forward at ful power for 3/4 of a second", group = "Bridge")
+@Autonomous(name = "moves forward for a second", group = "Competition.3")
 public class oneSecondAuto extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -43,7 +43,7 @@ public class oneSecondAuto extends LinearOpMode {
 
     public void Path() {
         runtime.reset();
-        power(1,750);
+        power(1,1000);
     }
 
     @Override
@@ -64,12 +64,7 @@ public class oneSecondAuto extends LinearOpMode {
         leftrear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightrear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        while (opModeIsActive()){
-            if (!stop){
-                Path();
-                stop = true;
-            }
-        }
+        Path();
 
     }
 }

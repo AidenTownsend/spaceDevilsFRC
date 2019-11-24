@@ -35,6 +35,11 @@ public class competition3TeleOp extends OpMode {
         leftrPower = Range.clip(((drive + turn - strafe)), -1.0, 1.0);
         rightrPower = Range.clip(((drive - turn + strafe)), -1.0, 1.0);
 
+        if (strafe!=0){
+            leftrPower*=0.65;
+            rightrPower*=0.65;
+        }
+
         if(gamepad1.right_bumper) {
             double slolf = leftfPower/5;
             double slorf = rightfPower/5;
